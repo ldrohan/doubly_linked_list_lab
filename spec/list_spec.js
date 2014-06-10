@@ -1,4 +1,5 @@
 var List = require("../app/javascripts/list.js");
+var Node = require("../app/javascripts/Node.js");
 
 
 
@@ -98,14 +99,16 @@ describe("List", function(){
       expect(list.length).toEqual(2);
     });
 
+    it("should return self", function(){
+      expect(list.push(1)).toEqual(list);
+    });
+
     it("should set previous() on new node", function(){
       list.push(1).push(2)
       expect(list.tail.previous()).toBe(list.head);
     });
 
-    it("should return self", function(){
-      expect(list.push(1)).toEqual(list);
-    });
+    
 
 
   });
@@ -146,6 +149,7 @@ describe("List", function(){
       list.push(2);
       list.push(3);
       var secondToLast = list.tail.previous();
+      list.pop();
       expect(secondToLast).toBe(list.tail)
     });
 
@@ -157,17 +161,12 @@ describe("List", function(){
 
 
   describe("#head", function(){
-    it("should return null if empty", function(){
-      var list = new List();
-      expect(list.head()).toEqual(null);
-    });
+    it("should return null if empty", function(){
+      var list = new List();
+      expect(list.head).toEqual(null);
+    });
+  });
 
-    it("should return first node.value when nonempty", function(){
-      var list = new List();
-      list.push(1);
-      expect(list.head()).toEqual(1);
-    });
-  });
 
 
   describe("#shift", function(){
